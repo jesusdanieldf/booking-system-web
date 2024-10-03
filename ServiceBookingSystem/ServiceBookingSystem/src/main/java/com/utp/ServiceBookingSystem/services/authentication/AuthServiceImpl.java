@@ -27,4 +27,22 @@ public class AuthServiceImpl implements AuthService {
 
         return userRepository.save(user).getDto();
     }
+
+    public Boolean presentByEmail(String email){
+        return userRepository.findFirstByEmail(email) != null;//true si tenemos al usuario
+    }
+
+    public UserDto signupCompany(SignupRequestDTO signupRequestDTO){
+        User user = new User();
+
+        user.setName(signupRequestDTO.getName());
+
+        user.setEmail(signupRequestDTO.getEmail());
+        user.setPhone(signupRequestDTO.getPhone());
+        user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
+
+        user.setRole(UserRole.COMPANY);
+
+        return userRepository.save(user).getDto();
+    }
 }
