@@ -6,11 +6,10 @@ import com.utp.ServiceBookingSystem.services.authentication.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 //import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
+//@RequestMapping("/auth") //mapeo de prueba
 @RestController
 public class AuthenticationController {
 
@@ -27,7 +26,7 @@ public class AuthenticationController {
 
         UserDto createdUser = authService.signupClient(signupRequestDTO);
 
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
 
     //Creacion de endpoint para Company Sign-up
@@ -35,11 +34,18 @@ public class AuthenticationController {
     public ResponseEntity<?> signupCompany(@RequestBody SignupRequestDTO signupRequestDTO){
 
         if(authService.presentByEmail(signupRequestDTO.getEmail())){
-            return new ResponseEntity<>("Ya existe un compañia con este email", HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>("Ya existe un compañía con este email", HttpStatus.NOT_ACCEPTABLE);
         }
 
         UserDto createdUser = authService.signupClient(signupRequestDTO);
 
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(createdUser, HttpStatus.OK);
     }
+
+    // Endpoint temporal para agregar un usuario de prueba
+    /*@GetMapping("/add-test-user")
+    public ResponseEntity<UserDto> addTestUser() {
+        UserDto userDto = authService.addTestUser();
+        return ResponseEntity.ok(userDto); // Devuelve el usuario guardado
+    }*/
 }

@@ -9,5 +9,5 @@ public class SignupRequestDTO {
     private String name;
     private String lastname;
     private String phone;
-
+    //removemos role
 }

@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
 
         user.setName(signupRequestDTO.getName());
-
+        //user.setLastname(signupRequestDTO.getLastname());
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
         user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
@@ -45,4 +45,20 @@ public class AuthServiceImpl implements AuthService {
 
         return userRepository.save(user).getDto();
     }
+//Pruebas:
+
+    /*public UserDto addTestUser() {
+        User user = new User();
+        user.setName("Test");
+        user.setLastname("User");
+        user.setEmail("prueba_sprint2@example.com");
+        user.setPhone("123456789");
+        user.setPassword("password123");
+        user.setRole(UserRole.CLIENT);
+
+        User savedUser = userRepository.save(user); // Esto guardará el usuario en la base de datos
+
+        return savedUser.getDto(); // Retorna el DTO con los datos guardados
+    }*/
+
 }
