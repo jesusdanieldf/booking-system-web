@@ -6,6 +6,7 @@ import com.utp.ServiceBookingSystem.entity.User;
 import com.utp.ServiceBookingSystem.enums.UserRole;
 import com.utp.ServiceBookingSystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +22,9 @@ public class AuthServiceImpl implements AuthService {
         user.setLastname(signupRequestDTO.getLastname());
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
-        user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
+        //user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
+        user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
+
 
         user.setRole(UserRole.CLIENT);
 
@@ -39,7 +42,8 @@ public class AuthServiceImpl implements AuthService {
         //user.setLastname(signupRequestDTO.getLastname());
         user.setEmail(signupRequestDTO.getEmail());
         user.setPhone(signupRequestDTO.getPhone());
-        user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
+        //user.setPassword(signupRequestDTO.getPassword()); //a futuro encriptar password en DB
+        user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
 
         user.setRole(UserRole.COMPANY);
 

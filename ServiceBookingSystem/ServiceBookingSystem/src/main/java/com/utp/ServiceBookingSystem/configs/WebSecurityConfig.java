@@ -1,6 +1,7 @@
 package com.utp.ServiceBookingSystem.configs;
 
 import com.utp.ServiceBookingSystem.services.jwt.JwtRequestFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -31,7 +32,8 @@ public class WebSecurityConfig {
                 .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
+    // Definición del bean de AuthenticationManager
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
